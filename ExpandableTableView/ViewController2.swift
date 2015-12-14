@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ViewController2: UIViewController, ExpandableTableViewDelegate, ExpandableViewDelegate {
+class ViewController2: UIViewController, ExpandableTableViewDelegate, ExtendedViewDelegate {
 
-    @IBOutlet var expandableView: ExpandableView!
+    @IBOutlet var expandableView: ExtendedTableView!
     @IBOutlet var viewHeight: NSLayoutConstraint!
     
     let array = ["Title1", "Title2", "Title3", "Title4"]
@@ -26,7 +26,7 @@ class ViewController2: UIViewController, ExpandableTableViewDelegate, Expandable
         expandableView.layer.cornerRadius = 6
         expandableView.backgroundColor = UIColor.clearColor()
         expandableView.expandableTableDelegate = self
-        expandableView.expnadableViewDelegate = self
+        expandableView.extendedViewDelegate = self
         
         let button = UIButton(type: UIButtonType.System)
         button.frame = CGRectMake(0, 0, 0, 60)
@@ -45,10 +45,10 @@ class ViewController2: UIViewController, ExpandableTableViewDelegate, Expandable
 
 //  MARK: - Actions
     func click(sender: AnyObject) {
-        if expandableView.isShowingTable() {
-            expandableView.hideTable()
+        if expandableView.isShowingExtendedView() {
+            expandableView.hideExtendedView()
         } else {
-            expandableView.showTable()
+            expandableView.showExtendedView()
         }
     }
     
@@ -74,7 +74,7 @@ class ViewController2: UIViewController, ExpandableTableViewDelegate, Expandable
     }
     
 //  MARK: - ExpandableViewDelegate
-    func mayChangeHeight(height: CGFloat, expandableView: ExpandableView) {
+    func mayChangeHeight(height: CGFloat, extendedView: ExtendedView) {
         /* If set the identifier of ExpandableView hegiht constraint to "Height", no need this  */
 //        viewHeight.constant = height
 //        UIView.animateWithDuration(0.3) { () -> Void in
