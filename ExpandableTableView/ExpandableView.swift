@@ -15,7 +15,7 @@ import UIKit
 class ExpandableView: UIView, ExpandableTableStateDelegate {
 
     private static let defaultAnimDuration = 0.3
-    private static let kHeight = "Hegiht"
+    private static let kHeight = "Height"
     
     var expandableTableDelegate: ExpandableTableViewDelegate?
     var expnadableViewDelegate: ExpandableViewDelegate?
