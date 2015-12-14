@@ -15,6 +15,7 @@ import UIKit
 class ExpandableView: UIView, ExpandableTableStateDelegate {
 
     private static let defaultAnimDuration = 0.3
+    private static let kHeight = "Hegiht"
     
     var expandableTableDelegate: ExpandableTableViewDelegate?
     var expnadableViewDelegate: ExpandableViewDelegate?
@@ -96,7 +97,8 @@ class ExpandableView: UIView, ExpandableTableStateDelegate {
             
             addSubview(expandableTableView!)
             
-            expnadableViewDelegate?.mayChangeHeight?(calculateHeight(), expandableView: self)
+            updateHeight(calculateHeight())
+            
             UIView.animateWithDuration(0.3) { () -> Void in
                 self.resetTableHeight()
             }
@@ -113,7 +115,9 @@ class ExpandableView: UIView, ExpandableTableStateDelegate {
             
             var frame = self.frame
             frame.size.height = height
-            expnadableViewDelegate?.mayChangeHeight?(height, expandableView: self)
+            
+            updateHeight(height)
+            
             if collpaseAllWhenShowing {
                 expandableTableView?.collapseAll()
             }
@@ -166,11 +170,40 @@ class ExpandableView: UIView, ExpandableTableStateDelegate {
         return height
     }
     
+    private func updateHeight(height: CGFloat) {
+        for var constraint in constraints {
+            if ExpandableView.kHeight == constraint.identifier {
+                constraint.constant = height
+                
+                var view = superview
+                while view?.superview != nil {
+                    view = view?.superview
+                }
+                
+                if let v = view {
+                    UIView.animateWithDuration(animDuration) { () -> Void in
+                        v.layoutIfNeeded()
+                    }
+                }
+                
+                break
+            }
+        }
+        
+        expnadableViewDelegate?.mayChangeHeight?(calculateHeight(), expandableView: self)
+    }
+    
 //  MARK: - ExpandableTableStateDelegate
     func mayChangeHeight(height: CGFloat) {
-        expnadableViewDelegate?.mayChangeHeight?(calculateHeight(), expandableView: self)
-        UIView.animateWithDuration(animDuration) { () -> Void in
-            self.resetTableHeight()
+        if let table = expandableTableView {
+            updateHeight(calculateHeight())
+            
+            
+            var frame = table.frame
+            frame.size.height = height
+            UIView.animateWithDuration(animDuration) { () -> Void in
+                table.frame = frame
+            }
         }
     }
 }

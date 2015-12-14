@@ -34,6 +34,7 @@ class ViewController2: UIViewController, ExpandableTableViewDelegate, Expandable
         expandableView.mainView = button
         
         button.addTarget(self, action: "click:", forControlEvents: UIControlEvents.TouchUpInside)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,9 +75,10 @@ class ViewController2: UIViewController, ExpandableTableViewDelegate, Expandable
     
 //  MARK: - ExpandableViewDelegate
     func mayChangeHeight(height: CGFloat, expandableView: ExpandableView) {
-        viewHeight.constant = height
-        UIView.animateWithDuration(0.3) { () -> Void in
-            self.view.layoutIfNeeded()
-        }
+        /* If set the identifier of ExpandableView hegiht constraint to "Height", no need this  */
+//        viewHeight.constant = height
+//        UIView.animateWithDuration(0.3) { () -> Void in
+//            self.view.layoutIfNeeded()
+//        }
     }
 }

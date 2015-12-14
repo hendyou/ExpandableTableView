@@ -108,7 +108,7 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.90204458499999995" green="1" blue="0.62543469139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="vEz-ex-T33"/>
+                                    <constraint firstAttribute="height" constant="60" identifier="Height" id="vEz-ex-T33"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hX7-Za-hBM">
